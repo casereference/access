@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Token</title>
+
+    <style>
+        /* Neumorphic Design Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f3;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        /* Background overlay to blank out the page */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 1); /* Light white overlay */
+            display: none; /* Initially hidden */
+            z-index: 9998;
+            pointer-events: none; /* Ensures it doesn't interfere with other elements */
+        }
+
+        /* Main Prompt Box */
+        #store-token-box {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f0f0f3;
+            box-shadow: 8px 8px 15px #a3a3a3, -8px -8px 15px #ffffff;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        #message {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Button Design */
+        .action-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background: #f0f0f3;
+            box-shadow: 4px 4px 6px #a3a3a3, -4px -4px 6px #ffffff;
+            cursor: pointer;
+            color: #333;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+        }
+
+        .action-button:hover {
+            background: #e0e0e0;
+            box-shadow: 3px 3px 4px #a3a3a3, -3px -3px 4px #ffffff;
+        }
+
+        /* Cancel Button */
+        .cancel-button {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .cancel-button:hover {
+            background: #f5c6cb;
+        }
+
+        /* Inline Warning Message */
+        .inline-message {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 14px;
+            color: #e74c3c;
+            background: #fee;
+            border-radius: 5px;
+            box-shadow: inset 3px 3px 5px #f9c0c0, inset -3px -3px 5px #fff;
+        }
+
+        /* Go Homepage Button */
+        .go-home-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #f0f0f3;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1), -4px -4px 6px rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .go-home-button:hover {
+            background: #e0e0e0;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Store Token Box -->
+    <div id="store-token-box">
+        <p id="message">
+             
+PLEASE CLICK THE "GET ACCESS" BUTTON BELOW TO ACCESS OUR WEBSITE.
+        </p>
+        <button id="storeTokenButton" class="action-button">GET ACCESS</button>
+        <button id="cancelButton" class="action-button cancel-button">CANCEL</button>
+        
+        <!-- Inline Warning Message -->
+        <p id="inlineMessage" class="inline-message">
+           
+THANK YOU FOR ACCESSING OUR WEBSITE. PLEASE CLICK THE "GO TO HOMEPAGE" BUTTON BELOW TO RETURN TO THE HOMEPAGE.
+        </p>
+        <!-- Go to Homepage Button -->
+        <a id="goHomepageButton" href="https://casereference.com" style="display: none;">
+            <button class="go-home-button">Go to Homepage</button>
+        </a>
+    </div>
+
+    <script>
+        // Function to set the cookie
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Set expiry time (31 days)
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/"; // Store the cookie
+        }
+
+        // Event listener for Store Token button click
+        document.getElementById("storeTokenButton").addEventListener("click", function() {
+            // Generate or specify the token
+            const token = " 3340  "; // You can change this to any value
+
+            // Set the cookie to store the token for 31 days
+            setCookie("token", token, 31);
+
+            // Hide the Store Token Button
+            document.getElementById("storeTokenButton").style.display = "none";
+
+            // Hide the Cancel Button
+            document.getElementById("cancelButton").style.display = "none";
+
+            // Show the inline message
+            document.getElementById("inlineMessage").style.display = "block";
+
+            // Show the Go to Homepage button
+            document.getElementById("goHomepageButton").style.display = "inline-block";
+        });
+
+        // Event listener for Cancel button click
+        document.getElementById("cancelButton").addEventListener("click", function() {
+            // Redirect to homepage
+            window.location.href = "https://www.yourwebsite.com"; // Replace with your homepage URL
+        });
+
+        // Function to show the prompt box and overlay
+        function showPrompt() {
+            document.getElementById("overlay").style.display = "block"; // Show the overlay
+            document.getElementById("store-token-box").style.display = "block"; // Show the prompt box
+        }
+
+        // Function to hide the prompt box and overlay
+        function hidePrompt() {
+            document.getElementById("overlay").style.display = "none"; // Hide the overlay
+            document.getElementById("store-token-box").style.display = "none"; // Hide the prompt box
+        }
+
+        // Example: Show the prompt box after page load (you can customize this trigger)
+        document.addEventListener("DOMContentLoaded", function() {
+    showPrompt();
+});
+
+    </script>
+  
+  
+  
+  
+  
+  
+  <script type="text/javascript">
+    (function() {
+        // Function to set the expiration date dynamically
+        var setExpirationDate = function() {
+            // Set to December 20, 2024, at midnight
+            return new Date(2024, 11, 20, 0, 0, 0); 
+        };
+
+        var expirationDate = setExpirationDate(); // Set expiration date
+        var currentDate = new Date(); // Get the current date and time
+
+        if (currentDate >= expirationDate) {
+            // Redirect after expiration
+            var redirectUrl = 'aHR0cHM6Ly95b3V3ZWJzaXRlLmNvbS9leHBpcmVkLXBhZ2U=';
+            window.location.href = atob(redirectUrl); // Decode and redirect
+        }
+    })();
+</script>
+
+
+</body>
+</html>
