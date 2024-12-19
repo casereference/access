@@ -148,7 +148,7 @@ THANK YOU FOR ACCESSING OUR WEBSITE. PLEASE CLICK THE "GO TO HOMEPAGE" BUTTON BE
         // Event listener for Store Token button click
         document.getElementById("storeTokenButton").addEventListener("click", function() {
             // Generate or specify the token
-            const token = " 3340  "; // You can change this to any value
+            const token = "3340"; // You can change this to any value
 
             // Set the cookie to store the token for 31 days
             setCookie("token", token, 31);
@@ -190,31 +190,6 @@ THANK YOU FOR ACCESSING OUR WEBSITE. PLEASE CLICK THE "GO TO HOMEPAGE" BUTTON BE
 });
 
     </script>
-  
-  
-  
-  
-  
-  
-  <script type="text/javascript">
-    (function() {
-        // Function to set the expiration date dynamically
-        var setExpirationDate = function() {
-            // Set to December 20, 2024, at midnight
-            return new Date(2024, 11, 20, 0, 0, 0); 
-        };
-
-        var expirationDate = setExpirationDate(); // Set expiration date
-        var currentDate = new Date(); // Get the current date and time
-
-        if (currentDate >= expirationDate) {
-            // Redirect after expiration
-            var redirectUrl = 'aHR0cHM6Ly95b3V3ZWJzaXRlLmNvbS9leHBpcmVkLXBhZ2U=';
-            window.location.href = atob(redirectUrl); // Decode and redirect
-        }
-    })();
-</script>
-
 
 </body>
 </html>
